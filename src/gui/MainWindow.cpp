@@ -274,6 +274,7 @@ MainWindow::~MainWindow()
 	//   see issue #2015 on github
 	delete gui->automationEditor();
 	delete gui->pianoRoll();
+	delete gui->pianoRolls();
 	delete gui->songEditor();
 	// destroy engine which will do further cleanups etc.
 	Engine::destroy();
@@ -513,6 +514,13 @@ void MainWindow::finalize()
 					this, SLOT( togglePianoRollWin() ),
 								m_toolBar );
 	piano_roll_window->setShortcut( Qt::CTRL + Qt::Key_3 );
+
+	ToolButton* piano_roll_add = new ToolButton( 
+		embed::getIconPixmap( "piano" ),
+		tr( "Add piano roll" ),
+		this,
+		SLOT( addPianoRoll() ),
+		m_toolBar );
 
 	ToolButton * automation_editor_window = new ToolButton(
 					embed::getIconPixmap( "automation" ),
@@ -1092,7 +1100,19 @@ void MainWindow::toggleProjectNotesWin()
 
 void MainWindow::togglePianoRollWin()
 {
-	toggleWindow( gui->pianoRoll() );
+	for (int i = 0;  i < gui->pianoRolls().size(); i++)
+	{
+		toggleWindow( gui->pianoRolls()[i] );
+		//toggleWindow( gui->pianoRoll() );
+	}
+}
+
+
+
+
+void MainWindow::addPianoRoll()
+{
+	gui->pianoRolls.push_back(new PianoRollWindow(gui->getPianoCounterAndAdd()));
 }
 
 

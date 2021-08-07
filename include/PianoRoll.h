@@ -286,7 +286,7 @@ private:
 	QMenu * m_semiToneMarkerMenu; // when you right click on the key area
 	int m_pianoKeySelected;
 
-	PianoRoll();
+	PianoRoll( int thisWindow = 0 );
 	PianoRoll( const PianoRoll & );
 	virtual ~PianoRoll();
 

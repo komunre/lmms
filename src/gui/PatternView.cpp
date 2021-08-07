@@ -100,10 +100,17 @@ void PatternView::update()
 
 void PatternView::openInPianoRoll()
 {
-	gui->pianoRoll()->setCurrentPattern( m_pat );
-	gui->pianoRoll()->parentWidget()->show();
-	gui->pianoRoll()->show();
-	gui->pianoRoll()->setFocus();
+	gui->pianoRolls()->push_back(new PianoRollWindow())
+	int currentPiano = gui->lastPiano();
+	PianoRollWindow currentPianoWindow = gui->pianoRolls()[currentPiano];
+	currentPianoWindow->setCurrentPattern( m_pat );
+	currentPianoWindow->parentWidget()->show();
+	currentPianoWindow->show();
+	currentPianoWindow->setFocus();
+	//gui->pianoRoll()->setCurrentPattern( m_pat );
+	//gui->pianoRoll()->parentWidget()->show();
+	//gui->pianoRoll()->show();
+	//gui->pianoRoll()->setFocus();
 }
 
 
@@ -112,6 +119,7 @@ void PatternView::openInPianoRoll()
 
 void PatternView::setGhostInPianoRoll()
 {
+	// TODO: probably replace this with multiple piano rolls functionality
 	gui->pianoRoll()->setGhostPattern( m_pat );
 	gui->pianoRoll()->parentWidget()->show();
 	gui->pianoRoll()->show();

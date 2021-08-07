@@ -152,6 +152,10 @@ GuiApplication::GuiApplication()
 	m_pianoRoll = new PianoRollWindow();
 	connect(m_pianoRoll, SIGNAL(destroyed(QObject*)), this, SLOT(childDestroyed(QObject*)));
 
+	//Add first piano roll to list
+	m_pianoRolls->push_back(new PianoRollWindow());
+	connect(m_pianoRolls, SIGNAL(destroyed(QObject*)), this, SLOT(childDestroyed(QObject*)));
+
 	displayInitProgress(tr("Preparing automation editor"));
 	m_automationEditor = new AutomationEditorWindow;
 	connect(m_automationEditor, SIGNAL(destroyed(QObject*)), this, SLOT(childDestroyed(QObject*)));
@@ -160,6 +164,8 @@ GuiApplication::GuiApplication()
 	m_mainWindow->finalize();
 
 	m_loadingProgressLabel = nullptr;
+
+	m_pianoRolls = new std::vector<PianoRollWindow>
 }
 
 GuiApplication::~GuiApplication()

@@ -147,7 +147,7 @@ const QVector<float> PianoRoll::m_zoomYLevels =
 		{0.25f, 0.5f, 1.0f, 1.5f, 2.0f, 2.5f, 3.0f, 4.0f};
 
 
-PianoRoll::PianoRoll() :
+PianoRoll::PianoRoll( int thisWindow = 0 ) :
 	m_nemStr( QVector<QString>() ),
 	m_noteEditMenu( NULL ),
 	m_semiToneMarkerMenu( NULL ),
@@ -3639,7 +3639,7 @@ void PianoRoll::paintEvent(QPaintEvent * pe )
 	currentKeyCol.setAlpha( 64 );
 
 	// horizontal line for the key under the cursor
-	if(hasValidPattern() && gui->pianoRoll()->hasFocus())
+	if(hasValidPattern() && gui->pianoRolls()[thisWindow]->hasFocus())
 	{
 		int key_num = getKey( mapFromGlobal( QCursor::pos() ).y() );
 		p.fillRect( 10, keyAreaBottom() + 3 - m_keyLineHeight *
@@ -3651,7 +3651,7 @@ void PianoRoll::paintEvent(QPaintEvent * pe )
 	p.fillRect( QRect( 0, keyAreaBottom(),
 					width()-PR_RIGHT_MARGIN, NOTE_EDIT_RESIZE_BAR ), editAreaCol );
 
-	if (gui->pianoRoll()->hasFocus())
+	if (gui->pianoRolls()[thisWindow]->hasFocus())
 	{
 		const QPixmap * cursor = NULL;
 		// draw current edit-mode-icon below the cursor

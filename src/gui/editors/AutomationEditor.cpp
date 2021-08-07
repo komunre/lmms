@@ -279,6 +279,10 @@ void AutomationEditor::update()
 	// Note detuning?
 	if( m_pattern && !m_pattern->getTrack() )
 	{
+		for (int i = 0; i < gui->pianoRolls().size())
+		{
+			gui->pianoRolls()->update();
+		}
 		gui->pianoRoll()->update();
 	}
 }
@@ -1529,7 +1533,7 @@ void AutomationEditor::play()
 		if( Engine::getSong()->playMode() != Song::Mode_PlayPattern )
 		{
 			Engine::getSong()->stop();
-			Engine::getSong()->playPattern( gui->pianoRoll()->currentPattern() );
+			Engine::getSong()->playPattern( gui->getFocusedPiano()->currentPattern() );
 		}
 		else if( Engine::getSong()->isStopped() == false )
 		{
@@ -1537,7 +1541,7 @@ void AutomationEditor::play()
 		}
 		else
 		{
-			Engine::getSong()->playPattern( gui->pianoRoll()->currentPattern() );
+			Engine::getSong()->playPattern( gui->getFocusedPiano()->currentPattern() );
 		}
 	}
 	else if( inBBEditor() )

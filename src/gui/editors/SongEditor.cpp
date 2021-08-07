@@ -1103,7 +1103,7 @@ void SongEditorWindow::recordAccompany()
 void SongEditorWindow::stop()
 {
 	m_editor->m_song->stop();
-	gui->pianoRoll()->stopRecording();
+	gui->getFocusedPiano()->stopRecording();
 }
 
 
