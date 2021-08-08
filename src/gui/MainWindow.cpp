@@ -273,8 +273,8 @@ MainWindow::~MainWindow()
 	// dependencies are such that the editors must be destroyed BEFORE Song is deletect in Engine::destroy
 	//   see issue #2015 on github
 	delete gui->automationEditor();
-	delete gui->pianoRoll();
-	delete gui->pianoRolls();
+	//delete gui->pianoRoll();
+	//delete gui->pianoRolls(); // TODO: add vector deletion
 	delete gui->songEditor();
 	// destroy engine which will do further cleanups etc.
 	Engine::destroy();
@@ -1112,7 +1112,7 @@ void MainWindow::togglePianoRollWin()
 
 void MainWindow::addPianoRoll()
 {
-	gui->pianoRolls.push_back(new PianoRollWindow(gui->getPianoCounterAndAdd()));
+	gui->pianoRolls().push_back(new PianoRollWindow(gui->getPianoCounterAndAdd()));
 }
 
 

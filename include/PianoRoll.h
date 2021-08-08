@@ -482,6 +482,7 @@ private:
 	QBrush m_blackKeyActiveBackground;
 	QBrush m_blackKeyInactiveBackground;
 	QBrush m_blackKeyDisabledBackground;
+	int thisWindow = 0;
 
 signals:
 	void positionChanged( const TimePos & );
@@ -494,7 +495,7 @@ class PianoRollWindow : public Editor, SerializingObject
 {
 	Q_OBJECT
 public:
-	PianoRollWindow();
+	PianoRollWindow( int thisWindow = 0 );
 
 	const Pattern* currentPattern() const;
 	void setCurrentPattern( Pattern* pattern );

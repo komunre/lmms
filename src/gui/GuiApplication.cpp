@@ -153,8 +153,8 @@ GuiApplication::GuiApplication()
 	connect(m_pianoRoll, SIGNAL(destroyed(QObject*)), this, SLOT(childDestroyed(QObject*)));
 
 	//Add first piano roll to list
-	m_pianoRolls->push_back(new PianoRollWindow());
-	connect(m_pianoRolls, SIGNAL(destroyed(QObject*)), this, SLOT(childDestroyed(QObject*)));
+	m_pianoRolls.push_back(new PianoRollWindow());
+	connect(m_pianoRolls[0], SIGNAL(destroyed(QObject*)), this, SLOT(childDestroyed(QObject*)));
 
 	displayInitProgress(tr("Preparing automation editor"));
 	m_automationEditor = new AutomationEditorWindow;
@@ -165,7 +165,7 @@ GuiApplication::GuiApplication()
 
 	m_loadingProgressLabel = nullptr;
 
-	m_pianoRolls = new std::vector<PianoRollWindow>
+	m_pianoRolls = *(new std::vector<PianoRollWindow*>);
 }
 
 GuiApplication::~GuiApplication()
@@ -242,3 +242,14 @@ QFont GuiApplication::getWin32SystemFont()
 	return QFont( QString::fromUtf8( metrics.lfMessageFont.lfFaceName ), pointSize );
 }
 #endif
+
+PianoRollWindow* GuiApplication::getFocusedPiano(){ 
+	for (int i = 0; i < m_pianoRolls.size(); i++) 
+	{
+		if (m_pianoRolls[i]->hasFocus()) 
+		{
+			return m_pianoRolls[i];
+		}
+	} 
+	return nullptr;
+}

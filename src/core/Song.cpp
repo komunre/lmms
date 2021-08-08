@@ -887,11 +887,11 @@ void Song::clearProject()
 		gui->automationEditor()->setCurrentPattern( NULL );
 	}
 
-	if( gui && gui->pianoRolls() )
+	if( gui )
 	{
-		for (int i = 0; i < gui->pianoRolls().size()) 
+		for (int i = 0; i < gui->pianoRolls().size(); i++) 
 		{
-			gui->pianoRolls[i]->reset();
+			gui->pianoRolls()[i]->reset();
 		}
 		gui->pianoRoll()->reset();
 	}

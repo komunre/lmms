@@ -279,11 +279,11 @@ void AutomationEditor::update()
 	// Note detuning?
 	if( m_pattern && !m_pattern->getTrack() )
 	{
-		for (int i = 0; i < gui->pianoRolls().size())
+		for (int i = 0; i < gui->pianoRolls().size(); i++)
 		{
-			gui->pianoRolls()->update();
+			gui->pianoRolls()[i]->update();
 		}
-		gui->pianoRoll()->update();
+		//gui->pianoRoll()->update();
 	}
 }
 

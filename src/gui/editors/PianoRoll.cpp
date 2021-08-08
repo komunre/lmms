@@ -147,7 +147,7 @@ const QVector<float> PianoRoll::m_zoomYLevels =
 		{0.25f, 0.5f, 1.0f, 1.5f, 2.0f, 2.5f, 3.0f, 4.0f};
 
 
-PianoRoll::PianoRoll( int thisWindow = 0 ) :
+PianoRoll::PianoRoll( int thisWindow ) :
 	m_nemStr( QVector<QString>() ),
 	m_noteEditMenu( NULL ),
 	m_semiToneMarkerMenu( NULL ),
@@ -212,6 +212,7 @@ PianoRoll::PianoRoll( int thisWindow = 0 ) :
 	m_whiteKeyWidth(WHITE_KEY_WIDTH),
 	m_blackKeyWidth(BLACK_KEY_WIDTH)
 {
+	this->thisWindow = thisWindow;
 	// gui names of edit modes
 	m_nemStr.push_back( tr( "Note Velocity" ) );
 	m_nemStr.push_back( tr( "Note Panning" ) );
@@ -4705,9 +4706,9 @@ void PianoRoll::changeSnapMode()
 	m_gridMode = static_cast<GridMode>(m_snapModel.value());
 }
 
-PianoRollWindow::PianoRollWindow() :
+PianoRollWindow::PianoRollWindow( int thisWindow ) :
 	Editor(true, true),
-	m_editor(new PianoRoll())
+	m_editor(new PianoRoll( thisWindow ))
 {
 	setCentralWidget( m_editor );
 

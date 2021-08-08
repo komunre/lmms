@@ -26,11 +26,11 @@
 #define GUIAPPLICATION_H
 
 #include <QtCore/QObject>
+#include <vector>
 
 #include "lmms_export.h"
 #include "lmmsconfig.h"
 #include "PianoRoll.h"
-#include <vector>
 
 class QLabel;
 
@@ -39,7 +39,7 @@ class BBEditor;
 class ControllerRackView;
 class FxMixerView;
 class MainWindow;
-//class PianoRollWindow;
+class PianoRollWindow;
 class ProjectNotes;
 class SongEditorWindow;
 
@@ -63,7 +63,7 @@ public:
 	ProjectNotes* getProjectNotes() { return m_projectNotes; }
 	AutomationEditorWindow* automationEditor() { return m_automationEditor; }
 	ControllerRackView* getControllerRackView() { return m_controllerRackView; }
-	std::vector<PianoRollWindow> pianoRolls() { return m_pianoRolls; }
+	std::vector<PianoRollWindow*> pianoRolls() { return m_pianoRolls; }
 	int getPianoCounterAndAdd() 
 	{ 
 		int lastPiano = m_pianoCounter;
@@ -72,17 +72,7 @@ public:
 	}
 	int pianoCounter() { return m_pianoCounter; };
 	int lastPiano() { return m_pianoCounter - 1; };
-	PianoRollWindow* getFocusedPiano() 
-	{ 
-		for (int i = 0; i < m_pianoRolls.size(); i++) 
-		{
-			if (m_pianoRolls[i].hasFocus()) 
-			{
-				return &m_pianoRolls[i];
-			}
-		} 
-		return nullptr;
-	}
+	PianoRollWindow* getFocusedPiano();
 
 public slots:
 	void displayInitProgress(const QString &msg);
@@ -99,7 +89,7 @@ private:
 	AutomationEditorWindow* m_automationEditor;
 	BBEditor* m_bbEditor;
 	PianoRollWindow* m_pianoRoll;
-	std::vector<PianoRollWindow> m_pianoRolls;
+	std::vector<PianoRollWindow*> m_pianoRolls;
 	int m_pianoCounter = 0;
 	ProjectNotes* m_projectNotes;
 	ControllerRackView* m_controllerRackView;

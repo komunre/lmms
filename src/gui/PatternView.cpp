@@ -100,9 +100,9 @@ void PatternView::update()
 
 void PatternView::openInPianoRoll()
 {
-	gui->pianoRolls()->push_back(new PianoRollWindow())
+	gui->pianoRolls().push_back(new PianoRollWindow());
 	int currentPiano = gui->lastPiano();
-	PianoRollWindow currentPianoWindow = gui->pianoRolls()[currentPiano];
+	PianoRollWindow* currentPianoWindow = gui->pianoRolls()[currentPiano];
 	currentPianoWindow->setCurrentPattern( m_pat );
 	currentPianoWindow->parentWidget()->show();
 	currentPianoWindow->show();
